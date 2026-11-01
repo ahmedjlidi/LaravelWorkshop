@@ -2,18 +2,41 @@
 
 Five independent capstone exercises. Each takes approximately 5–8 minutes and changes 1–3 lines of PHP. The application uses Laravel 13, Blade, and SQLite with no frontend build or external services.
 
-## Requirements
+## Recommended for a mixed-OS workshop: Docker
+
+No host PHP, Composer, or PHP extensions are needed for this route. Install Docker once using [DOCKER_SETUP.md](DOCKER_SETUP.md), then run inside the project folder:
+
+macOS / Linux:
+
+```sh
+sh workshop.sh
+```
+
+Windows PowerShell:
+
+```powershell
+powershell -NoProfile -ExecutionPolicy Bypass -File .\workshop.ps1
+```
+
+Open **http://127.0.0.1:8080/** after the launcher reports ready. The scripts build the PHP environment, install dependencies, generate an app key, migrate, seed on first use, and wait for HTTP readiness. Source edits appear on the next browser request. The server runs in the background and normal restarts preserve data.
+
+For a challenge test use `sh workshop.sh test BusTest` or the Windows launcher with `test BusTest`. See [DOCKER_SETUP.md](DOCKER_SETUP.md) for all five test classes, installation instructions, stop/reset commands, ports, and partial-install troubleshooting. Supported Docker/virtualization must be installed first; a script cannot make every unsupported machine compatible.
+
+The native PHP/Composer route below remains available and uses port 8000 with a separate database.
+
+## Requirements for the native PHP/Composer route
+
 
 - PHP **8.4 or 8.5** and Composer 2. The committed lock file was installed and tested on PHP 8.4.1; Laravel framework version is 13.39.0.
 - PHP extensions: Ctype, cURL, DOM, Fileinfo, Filter, Hash, Mbstring, OpenSSL, PCRE, PDO, PDO_SQLite, Session, Tokenizer, XML, XMLWriter, and SQLite3. Composer reports missing extensions. ZIP/unzip is recommended for dependency extraction.
 - Git, if switching between the supplied `main` and `solutions` branches.
 - Internet access for the first Composer install; none needed while running the workshop.
 
-No Node, npm, Docker, database server, Redis, API keys, GPS, or email service is needed.
+No Node, npm, database server, Redis, API keys, GPS, or email service is needed. Docker is optional for the native route.
 
 Install PHP and Composer before the workshop. On macOS, Laravel Herd or Homebrew (`brew install php@8.4 composer`) are options. On Windows, Laravel Herd includes PHP; ensure the SQLite extensions are enabled in the CLI's php.ini. On Ubuntu/Debian, install an available supported PHP version and its CLI, SQLite3, Mbstring, XML, and cURL packages, plus Composer. Distribution package names vary. Verify with `php -v`, `composer --version`, and `php -m`. See the [Laravel installation documentation](https://laravel.com/docs/13.x/installation) for platform installation options.
 
-## Install and run
+## Install and run without Docker
 
 From a fresh checkout, run these commands in `laravel-capstone-workshop/`:
 
@@ -40,7 +63,7 @@ git branch solutions origin/solutions
 
 The bundle is a complete local Git repository transfer; it requires no GitHub account. Skip cloning if you are already in the delivered repository.
 
-## Environment
+## Native environment
 
 The supplied `.env.example` sets SQLite, file sessions/cache, synchronous queues, and log mail. Laravel defaults to `database/database.sqlite`; leave `DB_DATABASE` unset. If overriding it, supply an absolute path to an existing file. Do not set a MySQL connection or an external service.
 
@@ -89,7 +112,7 @@ These failures identify the intended challenges; do not skip or weaken the tests
 
 Tests use a separate, in-memory SQLite database and reseed for each case. They never erase your browser's workshop database. No separate testing `.env` or service is required. Run tests from a local environment with no cached production configuration; `php artisan config:clear` clears any stale config.
 
-## Refresh and reset
+## Refresh and reset without Docker
 
 Refresh sample dates and the seeded bus location without deleting student-created reports:
 
@@ -110,7 +133,7 @@ Reload the browser. If you were signed in during a reset, select a demo identity
 
 - `main`: student starter. Five TODO blocks; no executable reference answers or solution routes.
 - `solutions`: completed implementations plus the full `INSTRUCTOR_GUIDE.md`.
-- The schema, seeders, views, routes, dependencies, and tests are the same on both branches. Switching branches does not switch the ignored SQLite database.
+- The schema, seeders, views, routes, dependencies, Docker setup, and tests are the same on both branches. Switching branches does not switch the ignored SQLite database.
 
 Save your work before switching:
 
@@ -129,7 +152,7 @@ Commit only the changes you intend to keep. If a bundle clone only has the remot
 
 Instructors: switch to `solutions` and open `INSTRUCTOR_GUIDE.md` for exact answers, demonstration scripts, and common mistakes. The application never reads or serves that guide. Its web root must remain `public/` as provided by `php artisan serve`.
 
-## Troubleshooting
+## Native setup troubleshooting
 
 - **Missing PHP/Composer:** install them first, open a new terminal, and confirm the commands resolve to the intended PHP version.
 - **Composer platform errors:** use PHP 8.4+ and enable the named CLI extensions. Do not bypass platform requirements.
