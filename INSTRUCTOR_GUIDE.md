@@ -2,6 +2,12 @@
 
 Use this document with the `solutions` branch. The student starter is `main`. Allow 5–8 minutes after setup for each team's chosen exercise; each team edits only its marked TODO. All database and UI infrastructure is provided.
 
+## Docker option for mixed operating systems
+
+Use [DOCKER_SETUP.md](DOCKER_SETUP.md) for one-time Docker installation and one-command startup on macOS, Linux, and Windows. The Docker environment supplies PHP and Composer, preserves workshop data on restart, and mounts source so TODO edits appear on refresh. Use `sh workshop.sh test BankingTest` (or the Windows PowerShell equivalent) instead of a host `php artisan` command. Docker serves port 8080 with its own SQLite database; the native setup uses port 8000.
+
+Docker is optional. All Docker files and test-isolation settings are shared by both branches. Tests force an in-memory database and refuse to run against persistent SQLite.
+
 ## Before the room arrives
 
 1. Install dependencies and run the README setup on each machine. Internet is needed only for initial dependency downloads.
