@@ -16,10 +16,10 @@ class AdvisorController extends Controller
     {
         $validated = $request->validate(['interest' => ['required', 'in:programming,biology,design']]);
         $major = match ($validated['interest']) {
-            // TODO CHALLENGE 5: Map the three interests to majors (three lines).
-            // TODO: Add the programming match arm here.
-            // TODO: Add the biology match arm here.
-            // TODO: Add the design match arm here.
+            // CHALLENGE 5: Map the three interests to majors (three lines).
+            'programming' => 'Computer Science',
+            'biology' => 'Medicine',
+            'design' => 'Architecture',
             default => 'Explore your options',
         };
         Recommendation::create(['interest' => $validated['interest'], 'major' => $major]);

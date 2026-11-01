@@ -13,8 +13,8 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('view-investigation', function (User $user): bool {
-            // TODO CHALLENGE 1: Allow only the compliance_officer role (one line).
-            return false;
+            // CHALLENGE 1: Allow only the compliance_officer role (one line).
+            return $user->role === 'compliance_officer';
         });
     }
 }

@@ -15,9 +15,9 @@ class BusController extends Controller
     public function update(Request $request)
     {
         $validated = $request->validate([
-            // TODO CHALLENGE 2: Require numeric coordinates within Earth's bounds (two lines).
-            'latitude' => ['required', 'numeric'],
-            'longitude' => ['required', 'numeric'],
+            // CHALLENGE 2: Require numeric coordinates within Earth's bounds (two lines).
+            'latitude' => ['required', 'numeric', 'between:-90,90'],
+            'longitude' => ['required', 'numeric', 'between:-180,180'],
         ]);
         Bus::firstOrFail()->update($validated);
 

@@ -15,9 +15,9 @@ class CityController extends Controller
     public function store(Request $request)
     {
         $validated = $request->validate([
-            // TODO CHALLENGE 4: Require a description of at least 10 characters and a location (two lines).
-            'description' => ['required', 'string'],
-            'location' => ['nullable', 'string', 'max:255'],
+            // CHALLENGE 4: Require a description of at least 10 characters and a location (two lines).
+            'description' => ['required', 'string', 'min:10'],
+            'location' => ['required', 'string', 'max:255'],
         ]);
         IssueReport::create([
             'description' => $validated['description'],
