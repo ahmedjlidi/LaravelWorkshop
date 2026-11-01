@@ -110,7 +110,7 @@ The first command passes all **7 infrastructure checks** on both branches. On un
 
 These failures identify the intended challenges; do not skip or weaken the tests. Completing your own exercise should make its test class pass without editing any other challenge. All **43 tests / 213 assertions pass** on `solutions`.
 
-Tests use a separate, in-memory SQLite database and reseed for each case. They never erase your browser's workshop database. No separate testing `.env` or service is required. Run tests from a local environment with no cached production configuration; `php artisan config:clear` clears any stale config.
+Tests use a separate, in-memory SQLite database and reseed for each case. They never erase your browser's workshop database. The included `.env.testing` needs no edits or external service. Run tests from a local environment with no cached production configuration; `php artisan config:clear` clears any stale config.
 
 ## Refresh and reset without Docker
 
