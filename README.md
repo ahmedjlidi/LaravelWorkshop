@@ -2,6 +2,10 @@
 
 Five independent capstone exercises. Each takes approximately 5–8 minutes and changes 1–3 lines of PHP. The application uses Laravel 13, Blade, and SQLite with no frontend build or external services.
 
+## Student concept reference
+
+Download the [Laravel workshop cheat sheet (PDF)](docs/laravel-workshop-cheat-sheet.pdf). It covers Eloquent ORM, validation and persistence, authorization, PHP match expressions, and workshop commands. Complete examples use different domains so students can adapt the patterns to their own TODOs.
+
 ## Clone and run from GitHub
 
 The project lives at the repository root. `main` is the student starter with intentional TODOs; `solutions` contains the completed reference implementations. No host PHP, Composer, SQLite installation, or Node is needed with Docker.
