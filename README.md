@@ -4,7 +4,7 @@ Five independent capstone exercises. Each takes approximately 5–8 minutes and 
 
 ## Student concept reference
 
-Download the [Laravel workshop cheat sheet (PDF)](docs/laravel-workshop-cheat-sheet.pdf). It covers Eloquent ORM, validation and persistence, authorization, PHP match expressions, and workshop commands. Complete examples use different domains so students can adapt the patterns to their own TODOs.
+Download the [Laravel workshop cheat sheet (PDF)](docs/laravel-workshop-cheat-sheet.pdf). It covers Eloquent ORM, validation and persistence, authorization, PHP match expressions, and workshop commands. Short concept tables use different domains so students can adapt the patterns to their own TODOs, without long worked exercises.
 
 ## Clone and run from GitHub
 
