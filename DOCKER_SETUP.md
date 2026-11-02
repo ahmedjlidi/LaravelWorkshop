@@ -4,6 +4,12 @@ Use this route for a workshop with mixed Windows, macOS, and Linux machines. Onl
 
 This is an optional way to run the same application. The original PHP/Composer setup remains supported. Use one route at a time; their databases are separate.
 
+## Cloning from WSL or macOS
+
+See the [GitHub clone walkthrough in README](README.md#clone-and-run-from-github) for exact commands for both platforms. The repository URL is `https://github.com/ahmedjlidi/LaravelWorkshop.git`; application files live at its root.
+
+Inside WSL, use the Ubuntu terminal, enable Docker Desktop's **Resources → WSL Integration** for that distribution, clone under `~/projects`, and run `sh workshop.sh`. On macOS, use Terminal and the same shell command. Keep Docker Desktop running on the host. A normal clone uses the student `main` branch; `git switch solutions` selects completed behavior.
+
 ## Quick start after Docker is installed
 
 Unzip the starter source (or clone the Git bundle) and open a terminal **inside `laravel-capstone-workshop/`**, where `compose.yaml` lives. An editor and a browser are enough; Git is optional for a student-only ZIP.
