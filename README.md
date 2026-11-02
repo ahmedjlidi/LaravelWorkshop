@@ -2,27 +2,77 @@
 
 Five independent capstone exercises. Each takes approximately 5–8 minutes and changes 1–3 lines of PHP. The application uses Laravel 13, Blade, and SQLite with no frontend build or external services.
 
-## Recommended for a mixed-OS workshop: Docker
+## Clone and run from GitHub
 
-No host PHP, Composer, or PHP extensions are needed for this route. Install Docker once using [DOCKER_SETUP.md](DOCKER_SETUP.md), then run inside the project folder:
+The project lives at the repository root. `main` is the student starter with intentional TODOs; `solutions` contains the completed reference implementations. No host PHP, Composer, SQLite installation, or Node is needed with Docker.
 
-macOS / Linux:
+### Windows: clone inside WSL (Ubuntu)
+
+Install WSL 2 and Docker Desktop for Windows using [DOCKER_SETUP.md](DOCKER_SETUP.md). In Docker Desktop, enable **Settings → General → Use WSL 2 based engine** when available, then **Settings → Resources → WSL Integration → your Ubuntu distribution → Apply**. Keep Docker Desktop running in Windows. Use its integration rather than installing a second Docker Engine inside Ubuntu. See [Docker's WSL integration instructions](https://docs.docker.com/desktop/features/wsl/).
+
+Open the **Ubuntu / WSL terminal**, not PowerShell, and verify Docker is available there:
 
 ```sh
+docker version
+docker compose version
+```
+
+`docker version` must show a Server as well as a Client. If Git is missing in Ubuntu, install it once with `sudo apt update` followed by `sudo apt install -y git`. Then clone into your WSL home directory:
+
+```sh
+mkdir -p ~/projects
+cd ~/projects
+git clone https://github.com/ahmedjlidi/LaravelWorkshop.git
+cd LaravelWorkshop
 sh workshop.sh
 ```
 
-Windows PowerShell:
+Keep this checkout under `~/projects`, rather than `/mnt/c/...`, for the WSL filesystem workflow. After the script prints ready, open **http://127.0.0.1:8080/** in your Windows browser. Edit this same WSL checkout; with VS Code's WSL extension installed, `code .` opens it from Ubuntu. You do not use `workshop.ps1` when working inside WSL.
 
-```powershell
-powershell -NoProfile -ExecutionPolicy Bypass -File .\workshop.ps1
+If Docker is missing only inside Ubuntu, enable the distribution's WSL Integration and reopen Ubuntu. If the daemon cannot connect, open Docker Desktop in Windows and wait for its engine. Do not run `sudo apt install docker.io` to fix missing Desktop integration.
+
+### macOS: clone in Terminal
+
+Install and open [Docker Desktop for your Mac](https://docs.docker.com/desktop/setup/install/mac-install/), choosing Apple silicon or Intel as appropriate. Wait for its engine. If `git --version` reports missing developer tools, run `xcode-select --install` once and complete the installer.
+
+In **Terminal**:
+
+```sh
+mkdir -p ~/projects
+cd ~/projects
+git clone https://github.com/ahmedjlidi/LaravelWorkshop.git
+cd LaravelWorkshop
+sh workshop.sh
 ```
 
-Open **http://127.0.0.1:8080/** after the launcher reports ready. The scripts build the PHP environment, install dependencies, generate an app key, migrate, seed on first use, and wait for HTTP readiness. Source edits appear on the next browser request. The server runs in the background and normal restarts preserve data.
+Open **http://127.0.0.1:8080/** after the script reports ready. If Docker Desktop asks to share the checkout folder, allow access to that folder.
 
-For a challenge test use `sh workshop.sh test BusTest` or the Windows launcher with `test BusTest`. See [DOCKER_SETUP.md](DOCKER_SETUP.md) for all five test classes, installation instructions, stop/reset commands, ports, and partial-install troubleshooting. Supported Docker/virtualization must be installed first; a script cannot make every unsupported machine compatible.
+### Choose starter or completed behavior
 
-The native PHP/Composer route below remains available and uses port 8000 with a separate database.
+A normal clone opens `main`. To see all completed implementations, switch before starting (or save any student edits first):
+
+```sh
+git switch solutions
+sh workshop.sh
+```
+
+Git tracks the remote `solutions` branch automatically when no local branch exists. Return with `git switch main`. The scripts and schema are the same on both branches; saved Docker data remains in place. The UI has no solution toggle: the PHP source on the active branch determines behavior.
+
+### Daily commands in WSL or macOS
+
+Run these in the cloned `LaravelWorkshop` folder:
+
+```sh
+sh workshop.sh                         # Start; safe to repeat, preserves data
+sh workshop.sh test WorkshopPagesTest  # Check all public pages
+sh workshop.sh test BankingTest        # Test one exercise
+sh workshop.sh seed                    # Refresh sample dates for a new workshop day
+sh workshop.sh stop                    # Stop while keeping data
+```
+
+On `main`, the full suite has 14 intentional exercise failures; on `solutions`, all 43 tests pass. Changes in your editor appear after refreshing the browser. First-time setup needs internet and may take several minutes. Keep Docker Desktop running; the app runs in the background after the terminal closes. For another port, use `WORKSHOP_PORT=8081 sh workshop.sh` and open port 8081.
+
+For installation from zero, PowerShell users, resets, and troubleshooting, see [DOCKER_SETUP.md](DOCKER_SETUP.md). The optional native PHP/Composer route is documented below.
 
 ## Requirements for the native PHP/Composer route
 
